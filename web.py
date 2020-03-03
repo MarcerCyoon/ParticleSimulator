@@ -16,17 +16,23 @@ def about():
 @app.route('/', methods=['POST'])
 def visual():
 	time = request.form.get("time", type=int)
-	massOne = request.form.get("massOne", type=float)
-	velOne = np.array([request.form.get("velOneX", type=float), request.form.get("velOneY", type=float)])
-	posOne = np.array([request.form.get("posOneX", type=float), request.form.get("posOneY", type=float)])
-	massTwo = request.form.get("massTwo", type=float)
-	velTwo = np.array([request.form.get("velTwoX", type=float), request.form.get("velTwoY", type=float)])
-	posTwo = np.array([request.form.get("posTwoX", type=float), request.form.get("posTwoY", type=float)])
 	coeff = request.form.get("coeff", type=int)
+	numParticles = request.form.get("numParticles", type=int)
+
+	massArray = np.zeros(numParticles)
+	velArray = np.zeros((numParticles, 2))
+	posArray = np.zeros((numParticles, 2))
+
+	for i in range(1, numParticles + 1):
+		massArray[i - 1] = request.form.get("mass" + str(i), type=float)
+		velArray[i - 1][0] = request.form.get("vel" + str(i) + "X", type=float)
+		velArray[i - 1][1] = request.form.get("vel" + str(i) + "Y", type=float)
+		posArray[i - 1][0] = request.form.get("pos" + str(i) + "X", type=float)
+		posArray[i - 1][1] = request.form.get("pos" + str(i) + "Y", type=float)
 
 	if coeff is None:
 		coeff = 3
 
-	fileName = animation.generate(2, np.array([massOne, massTwo]), np.array([velOne, velTwo]), np.array([posOne, posTwo]), time, coeff)
+	fileName = animation.generate(numParticles, massArray, velArray, posArray, time, coeff)
 
 	return render_template('visual.html', currentPath=fileName)

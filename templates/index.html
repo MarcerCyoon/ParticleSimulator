@@ -7,17 +7,12 @@
 
 <body>
   <center>
-  <h1> Particle Simulator </h1>
-  <form method="POST">
+  <h1> Particle Simulator </h1>  
+  <form method="POST" id="form">
+    Number of Particles: <input type="text" id="numParticles" name="numParticles" value="3"> <button id="wow" type="button"> Calibrate </button> <br> <br>
     Time: <input type="text" id="time" name="time" size="5"> <br> <br>
-    Mass 1: <input type="text" id="massOne" name="massOne" size="5"> <br> <br>
-    Velocity 1: (<input type="text" id="velOneX" name="velOneX" size="1">, <input type="text" id="velOneY" name="velOneY" size="1">) <br> <br>
-    Position 1: (<input type="text" id="posOneX" name="posOneX" size="1">, <input type="text" id="posOneY" name="posOneY" size="1">) <br> <br>
-    Mass 2: <input type="text" id="massTwo" name="massTwo" size="5"> <br> <br>
-    Velocity 2: (<input type="text" id="velTwoX" name="velTwoX" size="1">, <input type="text" id="velTwoY" name="velTwoY" size="1">) <br> <br>
-    Position 2: (<input type="text" id="posTwoX" name="posTwoX" size="1">, <input type="text" id="posTwoY" name="posTwoY" size="1">) <br> <br>
     Exponent of Force: <input type="text" id="coeff" name="coeff" size="5" value="3"> <br> <br>
-    <input type="submit" value="Simulate!"> <br> <br>
+    <div id="placeDiv"></div>
   </form>
   <button OnClick="randomize()" type="button">Randomize Values</button>
   <br>
@@ -27,17 +22,19 @@
 
 <script>
 function randomize() {
+  num = getRandomInt(1, 11);
+  document.getElementById("numParticles").value = num;
+  document.getElementById("wow").click();
   document.getElementById("time").value = "100";
-  document.getElementById("massOne").value = detMass(getRandomInt(0, 2));
-  document.getElementById("massTwo").value = detMass(getRandomInt(0, 2));
-  document.getElementById("velOneX").value = getRandomInt(-3, 3);
-  document.getElementById("velOneY").value = getRandomInt(-3, 3);
-  document.getElementById("velTwoX").value = getRandomInt(-3, 3);
-  document.getElementById("velTwoY").value = getRandomInt(-3, 3);
-  document.getElementById("posOneX").value = getRandomInt(-30, 30);
-  document.getElementById("posOneY").value = getRandomInt(-30, 30);
-  document.getElementById("posTwoX").value = getRandomInt(-30, 30);
-  document.getElementById("posTwoY").value = getRandomInt(-30, 30);
+
+  for (var i = 1; i < num + 1; i = i + 1) {
+    document.getElementById("mass" + i).value = detMass(getRandomInt(0, 2));
+    document.getElementById("vel" + i + "X").value = getRandomInt(-3, 3);
+    document.getElementById("vel" + i + "Y").value = getRandomInt(-3, 3);
+    document.getElementById("pos" + i + "X").value = getRandomInt(-30, 30);
+    document.getElementById("pos" + i + "Y").value = getRandomInt(-30, 30);
+  }
+}
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -53,7 +50,26 @@ function detMass(num) {
   }
 }
 
+var form = document.getElementById("placeDiv");
+var button = document.getElementById("wow");
+
+function calibrateForm() {
+  form.innerHTML = ""
+  var num = Number(numParticles.value);
+  for (var i = 1; i < num + 1; i = i + 1) {
+    var div = document.createElement("div");
+    div.innerHTML = `    Mass ${i}: <input type="text" id="mass${i}" name="mass${i}"> <br> <br>
+    Velocity ${i}: (<input type="text" id="vel${i}X" name="vel${i}X" size="1">, <input type="text" id="vel${i}Y" name="vel${i}Y" size="1">) <br> <br>
+    Position ${i}: (<input type="text" id="pos${i}X" name="pos${i}X" size="1">, <input type="text" id="pos${i}Y" name="pos${i}Y" size="1">) <br> <br>`
+    form.appendChild(div);
+  }
+
+  var div = document.createElement("div");
+  div.innerHTML = `<input type="submit" value="Simulate!"> <br> <br>`
+  form.appendChild(div);
 }
+
+button.addEventListener("click", calibrateForm);
 
 </script>
 /

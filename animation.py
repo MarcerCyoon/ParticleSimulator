@@ -53,10 +53,16 @@ G_CONST = 6.67 * (10 ** -4)
 
 
 def determineAx(positions):
+    print(positions)
     xlow = min(positions[:,0]) - np.mean(positions[:,0]) - 30
     xhigh = max(positions[:,0]) + np.mean(positions[:,0]) + 30
     ylow = min(positions[:,1]) - np.mean(positions[:,1]) - 30
     yhigh = max(positions[:, 1]) + np.mean(positions[:,1]) + 30
+
+    print(xlow)
+    print(xhigh)
+    print(ylow)
+    print(yhigh)
 
     return (xlow, xhigh, ylow, yhigh)
 
