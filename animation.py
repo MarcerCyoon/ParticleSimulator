@@ -103,7 +103,7 @@ def generate(numParticles, masses, vels, poss, time, coeff):
 
     anim = animation.FuncAnimation(fig, animate, init_func=init, frames=time, interval=10, blit=True)
 
-    fileName = "physics" + str(int(masses[0])) + str(int(masses[1])) + str(int(vels[0][0] + vels[0][1])) + str(int(vels[1][0] + vels[1][1])) + str(int(poss[0][0] + poss[0][1])) + str(int(poss[1][0] + poss[1][1])) + ".mp4"
+    fileName = "physics" + str(int(vels[0][0] + vels[0][1])) + str(int(vels[1][0] + vels[1][1])) + str(int(poss[0][0] + poss[0][1])) + str(int(poss[1][0] + poss[1][1])) + ".mp4"
 
     anim.save("static/" + fileName, writer='ffmpeg')
 
