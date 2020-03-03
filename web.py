@@ -11,7 +11,7 @@ def index():
 
 @app.route('/', methods=['POST'])
 def visual():
-	time = request.form.get("time", type=float)
+	time = request.form.get("time", type=int)
 	massOne = request.form.get("massOne", type=float)
 	velOne = np.array([request.form.get("velOneX", type=float), request.form.get("velOneY", type=float)])
 	posOne = np.array([request.form.get("posOneX", type=float), request.form.get("posOneY", type=float)])
