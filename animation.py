@@ -4,12 +4,13 @@ import matplotlib.animation as animation
 import random
 
 class Simulation:
-    def __init__(self, numParticles, velocities, positions, masses):
+    def __init__(self, numParticles, velocities, positions, masses, coeff=3):
        self.numParticles = numParticles
        self.velocities = np.zeros((numParticles, 2))
        self.positions = np.zeros((numParticles, 2))
        self.masses = np.zeros(numParticles)
        self.accelerations = np.zeros((numParticles, 2))
+       self.coeff = coeff
 
        for i in range(0, numParticles):
             self.velocities[i] = velocities[i]
@@ -41,7 +42,7 @@ class Simulation:
 
                 dist = np.linalg.norm(diff)
 
-                force = (G_CONST * self.masses[i] / (dist ** 3)) * diff
+                force = (G_CONST * self.masses[i] / (dist ** self.coeff)) * diff
 
                 self.accelerations[particleNum] += force
 
@@ -60,12 +61,12 @@ def determineAx(positions):
     return (xlow, xhigh, ylow, yhigh)
 
 
-def generate(numParticles, masses, vels, poss, time):
+def generate(numParticles, masses, vels, poss, time, coeff):
     # Setting some constants here.
     # A two-body simulation is what we are currently demonstrating.
     # Time Constant tells us how many steps to run.
     # A 1000 mass is assigned to both objects, for now, to simplify the prototype.
-    sim = Simulation(numParticles, vels, poss, masses)
+    sim = Simulation(numParticles, vels, poss, masses, coeff)
 
     fig = plt.figure()
 

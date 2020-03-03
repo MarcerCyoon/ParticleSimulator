@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+
+body {
+  background-color: lightpink;
+  font-family: "Fira Sans";
+  font-weight: 400;
+  font-size: 18px;
+}

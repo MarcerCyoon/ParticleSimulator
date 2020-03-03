@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang=en dir="ltr">
+<head>
+  <title>Particle Simulator | About</title>
+  <link rel="stylesheet" type="text/css" href="static/basic.css">
+</head>
+
+<body>
+  <h1> Particle Simulator | About</h1>
+
+  <div>
+    This n-bodies simulator was created as an independent project at Phillips Academy. <br>
+
+    The simulation will use your inputs to generate a .mp4 that demonstrates how those particles evolve over time. <br>
+
+    Below are a description of the parameters: <br><br>
+
+    Time: How long the simulation should be. It is in frames. <br>
+    Mass: The mass of the objects. It is in kilograms. A good value for mass is around 1000. <br>
+    Velocity: The velocity of the objects. You can add a x or y velocity, or both. At the start of experimentation, setting both velocities to 0 is a good idea. <br>
+    Position: The position of the objects. Feel free to have these be any value that does not exceed -100 or 100. <br>
+    Coefficient of Force: The n-bodies simulator uses, by default, Newton's Law of Gravitation. Part of Newton's Law is the denominator, which includes a r^3. <br> Changing this value will let you change the coefficient of the denominator to be, for example, r^2, instead. <br>
+  </div>
+
+  <br>
+  <br>
+  <button onclick="goBack()"> Go Back </button>
+</body>
+
+<script>
+function goBack() {
+  window.history.back()
+}
+</script>

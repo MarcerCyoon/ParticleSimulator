@@ -2,29 +2,58 @@
 <html lang=en dir="ltr">
 <head>
   <title>Particle Simulator</title>
+  <link rel="stylesheet" type="text/css" href="static/basic.css">
 </head>
 
 <body>
   <center>
   <h1> Particle Simulator </h1>
-  <form method="POST" name="init">
-    Time: <input type="text" name="time" size="5"> <br> <br>
-    Mass 1: <input type="text" name="massOne" size="5"> <br> <br>
-    Velocity 1: (<input type="text" name="velOneX" size="1">, <input type="text" name="velOneY" size="1">) <br> <br>
-    Position 1: (<input type="text" name="posOneX" size="1">, <input type="text" name="posOneY" size="1">) <br> <br>
-    Mass 2: <input type="text" name="massTwo" size="5"> <br> <br>
-    Velocity 2: (<input type="text" name="velTwoX" size="1">, <input type="text" name="velTwoY" size="1">) <br> <br>
-    Position 2: (<input type="text" name="posTwoX" size="1">, <input type="text" name="posTwoY" size="1">) <br> <br>
+  <form method="POST">
+    Time: <input type="text" id="time" name="time" size="5"> <br> <br>
+    Mass 1: <input type="text" id="massOne" name="massOne" size="5"> <br> <br>
+    Velocity 1: (<input type="text" id="velOneX" name="velOneX" size="1">, <input type="text" id="velOneY" name="velOneY" size="1">) <br> <br>
+    Position 1: (<input type="text" id="posOneX" name="posOneX" size="1">, <input type="text" id="posOneY" name="posOneY" size="1">) <br> <br>
+    Mass 2: <input type="text" id="massTwo" name="massTwo" size="5"> <br> <br>
+    Velocity 2: (<input type="text" id="velTwoX" name="velTwoX" size="1">, <input type="text" id="velTwoY" name="velTwoY" size="1">) <br> <br>
+    Position 2: (<input type="text" id="posTwoX" name="posTwoX" size="1">, <input type="text" id="posTwoY" name="posTwoY" size="1">) <br> <br>
+    Coefficient of Force: <input type="text" id="coeff" name="coeff" size="5" value="3"> <br> <br>
     <input type="submit" value="Simulate!"> <br> <br>
   </form>
-  <button>Randomize Values</button onclick="randomize()">
+  <button OnClick="randomize()" type="button">Randomize Values</button>
+  <br>
+  <button onclick="location.href='about'">Help!</button>
   </center>
 </body>
 
 <script>
 function randomize() {
-  var form = document.forms.init;
-  // form.elements.massOne.
+  document.getElementById("time").value = "100";
+  document.getElementById("massOne").value = detMass(getRandomInt(0, 2));
+  document.getElementById("massTwo").value = detMass(getRandomInt(0, 2));
+  document.getElementById("velOneX").value = getRandomInt(-3, 3);
+  document.getElementById("velOneY").value = getRandomInt(-3, 3);
+  document.getElementById("velTwoX").value = getRandomInt(-3, 3);
+  document.getElementById("velTwoY").value = getRandomInt(-3, 3);
+  document.getElementById("posOneX").value = getRandomInt(-30, 30);
+  document.getElementById("posOneY").value = getRandomInt(-30, 30);
+  document.getElementById("posTwoX").value = getRandomInt(-30, 30);
+  document.getElementById("posTwoY").value = getRandomInt(-30, 30);
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+function detMass(num) {
+  if (num == 1) {
+    return 1000;
+  } else {
+    return 3000;
+  }
+}
+
 }
 
 </script>
+/
